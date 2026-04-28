@@ -1,7 +1,8 @@
 # QUALITY_SCORE.md — SaaS 품질 기준
 
 > Core Layer의 `QUALITY_SCORE_BASE.md`를 기반으로 SaaS 특화 기준을 추가.
-> 공통 기준(코드 품질, 테스트 유형, 에러 처리, UI 상태 머신)은 Core 기준을 그대로 따른다.
+> **이 문서는 reviewer subagent가 매번 검토 시 source of truth로 읽는다.**
+> `/review` 또는 `/orchestrate` 흐름에서 자동 호출된다.
 
 ---
 
@@ -54,7 +55,7 @@
 | PATCH/DELETE 라우트 | 소유권 확인 (타인 리소스 접근 시 404) |
 | 관리자 기능 | 역할 기반 접근 제어 |
 
-**소유권 확인 패턴:**
+소유권 확인 패턴:
 ```ts
 // ✅ 반드시 user_id와 함께 조회
 const { data: owned } = await db
@@ -109,7 +110,7 @@ if (!owned) return 404
 
 ## 8. 검증 체크리스트 (기능 완료 시)
 
-Reviewer가 순서대로 실행:
+**Reviewer subagent가 순서대로 실행한다. 각 항목을 grep/lint/실행으로 확인.**
 
 ```
 Step 1: 정적 분석
@@ -118,8 +119,8 @@ Step 1: 정적 분석
   □ 예상 파일만 변경됨 (git diff 확인)
 
 Step 2: 보안
-  □ 모든 API 라우트 인증 확인
-  □ PATCH/DELETE 소유권 확인
+  □ 모든 API 라우트 인증 확인 코드 존재
+  □ PATCH/DELETE 소유권 확인 (user_id 검증)
   □ 시크릿 하드코딩 없음
   □ 클라이언트에 서버 전용 변수 노출 없음
   □ RLS 활성화 (신규 테이블 있는 경우)
@@ -134,7 +135,7 @@ Step 4: UI 상태 (UI 변경 있는 경우)
   □ Error가 Success 분기 안에 숨어있지 않음
   □ 상태 반응성 테스트 존재
 
-Step 5: 문서
-  □ PLANS.md 반영 예정 (Documenter에게 전달)
-  □ 변경사항이 product-specs와 일치
+Step 5: 스펙 일치
+  □ 변경사항이 product-spec과 일치
+  □ 스펙에 없는 기능 추가 없음
 ```

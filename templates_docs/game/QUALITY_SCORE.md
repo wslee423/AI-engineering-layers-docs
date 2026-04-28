@@ -1,6 +1,8 @@
 # QUALITY_SCORE.md — Game 품질 기준
 
 > Core Layer의 `QUALITY_SCORE_BASE.md`를 기반으로 게임 특화 기준을 추가.
+> **이 문서는 reviewer subagent가 매번 검토 시 source of truth로 읽는다.**
+> `/review` 또는 `/orchestrate` 흐름에서 자동 호출된다.
 
 ---
 
@@ -115,7 +117,7 @@ flutter analyze
 
 ## 9. 검증 체크리스트 (기능 완료 시)
 
-QA Agent가 `/run-qa` 실행 시 순서대로 확인:
+**Reviewer subagent가 순서대로 실행한다. 각 항목을 실제 명령어로 확인.**
 
 ```
 Step 1: 정적 분석
@@ -140,6 +142,7 @@ Step 5: 안정성
   □ 저장 실패 시 복구 동작 확인
   □ 엣지 케이스 (게임 오브젝트 예외 상황)
 
-Step 6: 문서
+Step 6: 스펙 일치
   □ 변경 내용이 product-specs와 일치
+  □ 스펙에 없는 기능 추가 없음
 ```

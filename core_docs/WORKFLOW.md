@@ -56,23 +56,24 @@
 ### 4-1. 작은 기능 흐름
 ```
 [사람] 방향 결정
-  → [에이전트] 크기 판단: Small
-  → [에이전트] 구현 + 자체 검증 (실패 시 3회 재시도)
-  → [에이전트] 문서 업데이트 + 커밋
-  → [에이전트] 사후 보고 (되돌릴 수 있음을 알림)
+  → [Orchestrator] 크기 판단: Small + 직접 구현
+  → [Reviewer subagent] 검증 (실패 시 3회 재시도)
+  → [Orchestrator] 문서 동기화 (/sync-docs) + 커밋
+  → [Orchestrator] 사후 보고
 ```
 
 ### 4-2. 큰 기능 흐름
 ```
 [사람] 방향 결정
-  → [에이전트] 크기 판단: Large
-  → [에이전트] 작업 전 확인 (문서 읽기, 불명확한 부분 질문, blocker 확인)
-  → [에이전트] 구현
-  → [에이전트] 자체 검증 (실패 시 3회 재시도 → 실패 시 에스컬레이션)
-  → [에이전트] 결과 보고 + 사람 승인 대기
+  → [Orchestrator] 크기 판단: Large + /orchestrate 실행
+  → [Implementer subagent] 구현
+  → [Reviewer subagent] 검증 (실패 시 3회 재시도 → 실패 시 에스컬레이션)
+  → [Orchestrator] Reviewer PASS 보고 + 사람 승인 대기
   → [사람] 최종 승인
-  → [에이전트] 문서 업데이트 + 커밋
+  → [Documenter subagent] 문서 업데이트 + 커밋
 ```
+
+상세 흐름: `.claude/commands/orchestrate.md` §3-B
 
 ### 4-3. 작업 중 크기가 바뀐 경우
 작은 기능으로 시작했는데 중간에 스키마 변경, 외부 API 필요 등이 발생하면

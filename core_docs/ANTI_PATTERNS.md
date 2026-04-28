@@ -159,6 +159,9 @@ const res = await fetch(externalUrl)  // 무한 대기 가능
 
 ## 5. 안티패턴 추가 규칙
 
+> **권장**: `/learn "<문제>"` 명령 사용. documenter가 L2(ANTI_PATTERNS) 승격 여부를 자동 판단.
+> 수동 등록 시 아래 조건 충족 필요.
+
 새 안티패턴 등록 조건 (모두 Yes):
 
 - [ ] 실제 발생 사례가 있는가? (추측 금지)

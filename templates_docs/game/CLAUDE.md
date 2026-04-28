@@ -92,30 +92,34 @@
   README.md
   lib/                        ← 게임 코드 (Mobile) 또는 Assets/ (Unity)
     game/
-      components/             ← 게임 오브젝트
-      systems/                ← 게임 로직
-    ui/                       ← UI 화면
+      components/
+      systems/
+    ui/
     data/
       stages/                 ← 스테이지 데이터 (JSON 등)
-  test/                       ← 테스트
+  test/
   docs/
     PLANS.md
     ARCHITECTURE.md
-    QUALITY_SCORE.md
     design-docs/
-      core-beliefs.md         ← 게임 설계 철학
-      visual-design.md        ← 비주얼 가이드
+      core-beliefs.md
+      visual-design.md
     product-specs/
     exec-plans/
       open-decisions.md
       tech-debt-tracker.md
       NEXT_SESSION.md
   .claude/
-    commands/
-      orchestrate.md
-      run-qa.md
-      build-stage.md
+    agents/               ← subagent 정의 (claude_code/agents/*.md 복사)
+      implementer.md
+      reviewer.md
+      documenter.md
+    commands/             ← 슬래시 커맨드 (claude_code/commands/*.md 복사)
+      orchestrate.md      ← 보편 + game 특화 override 병합
+      review.md
       sync-docs.md
+      learn.md
+      build-stage.md      ← placeholder (현재 implementer가 수행)
 ```
 
 *(실제 프로젝트 구조에 맞게 수정)*

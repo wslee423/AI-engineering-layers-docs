@@ -12,7 +12,7 @@
 → 다음: 검증 또는 자체 완료.
 
 ### "검증 통과" (Validation Pass)
-`QUALITY_SCORE.md` 체크리스트(섹션 7) 모든 항목 OK.
+`QUALITY_SCORE.md` 체크리스트 전체 항목 OK.
 → 다음: 문서 동기화 + 커밋.
 
 ### "완료" (Done)
@@ -39,7 +39,7 @@
 
 ### "큰 기능" (Large Feature)
 위 3가지 중 **하나라도** 해당 안 됨.
-→ 검증 통과 후 사람 최종 승인 필요.
+→ implementer subagent 사용. 검증 후 흐름은 `orchestrate.md` §3-B 참조.
 
 ### "엣지 케이스" (Edge Case)
 정상 흐름이 아닌 예외 상황 (네트워크 실패, 빈 입력, 권한 없음, 데이터 손상 등).
@@ -58,29 +58,16 @@
 
 ---
 
-## 🤖 에이전트 표준 역할 (Core 정의)
+## 🤖 에이전트 역할
 
-**Core는 아래 6개 표준 역할을 정의한다.** 프로젝트는 이 중 필요한 것만 선택하고, 이름을 매핑한다.
-새 역할 추가는 `AGENTS_PATTERN.md` 섹션 6 기준 통과 필요.
+현재 시스템의 4개 역할. 상세 구조는 `AGENTS_PATTERN.md` 참조.
 
-| 표준 역할 | 주요 책임 | 대표 이름 예시 |
-|----------|----------|-------------|
-| **Orchestrator** | 전체 기획, 작업 분석, 순서 결정 | Orchestrator |
-| **Implementer** | 코드 구현 | Implementer / Implementor |
-| **Reviewer** | 품질 검증, 규칙 준수 확인 | Reviewer / QA Agent |
-| **Domain Agent** | 도메인 특화 산출물 생성 | Stage Builder, Data Pipeline, Prompt Builder 등 |
-| **Doc Agent** | 문서 자동 동기화 | Doc Agent |
-| **Progress Tracker** | 진행 상태 기록, 커밋 | Progress / Progress Tracker |
-
-### 프로젝트별 매핑 (작성)
-| 표준 역할 | 이 프로젝트 이름 | 사용 여부 |
-|----------|----------------|---------|
-| Orchestrator | | |
-| Implementer | | |
-| Reviewer | | |
-| Domain Agent | | |
-| Doc Agent | | |
-| Progress Tracker | | |
+| 역할 | 실행 주체 | 주요 책임 |
+|------|---------|---------|
+| **Orchestrator** | Main Claude Session (별도 파일 없음) | 기능 크기 판단, 작업 흐름 조율, Small Feature 직접 구현 |
+| **Implementer** | subagent | 코드 구현 (Large Feature) |
+| **Reviewer** | subagent (READ-ONLY) | 품질 검증, QUALITY_SCORE 체크리스트 판정 |
+| **Documenter** | subagent | 문서 동기화(Mode A), 교훈 승격(Mode B) |
 
 ---
 

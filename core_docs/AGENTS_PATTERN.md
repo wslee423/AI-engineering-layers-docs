@@ -37,32 +37,28 @@
 
 ---
 
-## 2. 에이전트 구조 선택
+## 2. 에이전트 구조
 
-Core는 구조를 강제하지 않는다. 프로젝트 성격에 따라 Template Layer에서 선택.
+현재 표준 구조는 **Orchestrator 패턴**. SaaS/Game 템플릿 모두 이 구조를 사용한다.
 
-### 2-1. Orchestrator 패턴 (수직형)
-```
-Orchestrator → Implementer → Reviewer → Progress Tracker
-```
-**적합:** Web/Mobile SaaS, 기능 단위가 명확한 제품
-**특징:** Orchestrator가 교통정리. 단순 작업도 흐름을 거침.
+### 2-1. Orchestrator 패턴 (표준)
 
-### 2-2. Pipeline 패턴 (수평형)
 ```
-Implementer → Reviewer → Domain Agent → Doc Agent
+Main Session (Orchestrator)
+  ├─ Small Feature: Main이 직접 구현 → Reviewer subagent
+  └─ Large Feature: Implementer → Reviewer → Documenter
 ```
-**적합:** 게임, 데이터 툴, 도메인 특화 산출물이 있는 제품
-**특징:** 각 에이전트가 인수인계 조건 충족 시 자율적으로 다음으로 넘김.
 
-### 2-3. Hybrid 패턴
-```
-Orchestrator → (Implementer → Reviewer → Domain Agent) → Doc Agent
-```
-**적합:** AI 에이전트 제품, 복잡한 대형 프로젝트
-**특징:** 전체 기획은 Orchestrator, 실제 실행은 Pipeline 자율.
+| 역할 | 실행 주체 | 파일 |
+|------|---------|------|
+| Orchestrator | Main Claude Session | 별도 파일 없음 |
+| Implementer | subagent | `.claude/agents/implementer.md` |
+| Reviewer | subagent (READ-ONLY) | `.claude/agents/reviewer.md` |
+| Documenter | subagent | `.claude/agents/documenter.md` |
 
-> 표준 역할 6개 정의는 `GLOSSARY_TEMPLATE.md` 참조.
+상세 흐름: `.claude/commands/orchestrate.md`
+
+> 표준 역할 정의는 `GLOSSARY_TEMPLATE.md` 참조.
 
 ---
 

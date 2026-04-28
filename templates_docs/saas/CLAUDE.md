@@ -80,10 +80,15 @@
       tech-debt-tracker.md
       NEXT_SESSION.md
   .claude/
-    commands/
-      orchestrate.md
+    agents/               ← subagent 정의 (claude_code/agents/*.md 복사)
+      implementer.md
+      reviewer.md
+      documenter.md
+    commands/             ← 슬래시 커맨드 (claude_code/commands/*.md 복사)
+      orchestrate.md      ← 보편 + saas 특화 override 병합
       review.md
       sync-docs.md
+      learn.md
 ```
 
 *(실제 프로젝트 구조에 맞게 수정)*
