@@ -119,9 +119,25 @@ Core + Claude Code + Template를 조합하여 구성합니다.
 
 ---
 
+## 🚀 새 프로젝트 시작 (권장)
+
+**[PROJECT-SETUP-GUIDE.md](PROJECT-SETUP-GUIDE.md)** 참고
+
+Claude에 프롬프트 하나만 입력하면 완전한 프로젝트 초기화가 자동으로 됩니다.
+- ⏱️ 소요 시간: 약 20분 (Claude 생성 + 초기화)
+- 📋 생성 내용: 9~11개 완성 문서 + 초기화 스크립트
+- 💯 커버 범위: CONSTITUTION ~ exec-plans까지 모두 포함
+
+**3가지 프롬프트 템플릿 제공:**
+1. SaaS 프로젝트 (웹/모바일 비즈니스)
+2. Game 프로젝트 (게임 개발)
+3. 일반 템플릿 (기타 프로젝트 타입)
+
+---
+
 ## 시작하기
 
-### 새로운 프로젝트 초기화 (SaaS 예시)
+### 수동 초기화 (SaaS 예시)
 
 ```bash
 # 1. Core Layer 복사
