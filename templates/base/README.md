@@ -69,16 +69,22 @@ DATABASE_URL=
 | `AGENTS.md` | 에이전트 역할 및 자율 범위 |
 | `QUALITY_SCORE.md` | 품질 기준 |
 
-### 내부 문서 (`docs/`)
-| 경로 | 내용 |
+### 루트 문서
+| 파일 | 내용 |
 |------|------|
 | `PLANS.md` | 개발 로드맵, 체크리스트 |
 | `ARCHITECTURE.md` | 기술 스택 및 구조 |
-| `product-specs/` | 기능별 상세 스펙 |
-| `design-docs/` | 디자인 가이드 *(선택)* |
-| `exec-plans/open-decisions.md` | 미결 의사결정 |
-| `exec-plans/tech-debt-tracker.md` | 기술 부채 |
-| `exec-plans/NEXT_SESSION.md` | 다음 세션 핸드오프 |
+| `WORKFLOW.md` | 사람-에이전트 반복 실행 루프 |
+
+### 내부 문서 (`docs/`)
+| 경로 | 내용 |
+|------|------|
+| `docs/product-specs/` | 기능별 상세 스펙 |
+| `docs/design-docs/` | 디자인 가이드 *(선택)* |
+| `docs/exec/open-decisions.md` | 미결 의사결정 |
+| `docs/exec/tech-debt.md` | 기술 부채 |
+| `docs/exec/NEXT_SESSION.md` | 다음 세션 핸드오프 |
+| `docs/exec/lessons.md` | 교훈 로그 (L1) |
 
 ---
 
@@ -88,7 +94,7 @@ DATABASE_URL=
 - **최근 완료**: (기능명) — YYYY-MM-DD
 - **다음 할 것**: (작업명)
 
-상세: `docs/PLANS.md`, `docs/exec-plans/NEXT_SESSION.md`
+상세: `PLANS.md`, `docs/exec/NEXT_SESSION.md`
 
 ---
 
@@ -109,7 +115,7 @@ CONSTITUTION.md 섹션 5 요약. **수정은 CONSTITUTION.md에서만.**
 - **사람**: 방향 결정, 큰 기능 승인, CONSTITUTION 개정
 - **에이전트**: 구현, 검증, 문서 동기화, 작은 기능 자체 완료
 
-상세: Core의 `WORKFLOW.md`
+상세: `WORKFLOW.md`
 
 ---
 

@@ -1,0 +1,17 @@
+# .harness/manifest.yml — AI Harness 프로젝트 메타데이터
+# 이 파일은 harness 버전 추적과 팩 관리를 위해 사용된다.
+
+harness_version: v0.1.0          # 이 프로젝트가 초기화된 harness 버전
+agent_runtime_version: v0.1.0    # 적용된 agent_runtime 버전 (.claude/ 기준)
+
+project_type: base               # base / web-saas / mobile-game / ai-agent / data-tool
+
+applied_packs: []                # 적용된 팩 목록. 예: [web-saas, custom-auth]
+# applied_packs:
+#   - web-saas                   # 팩 적용 시 여기에 추가
+#   - mobile-game
+
+runtime_customizations: []       # agent_runtime에서 변경한 파일 목록 (업그레이드 충돌 추적용)
+# runtime_customizations:
+#   - .claude/agents/implementer.md   # 변경 이유: 프로젝트 특화 제약 추가
+#   - .claude/commands/orchestrate.md
