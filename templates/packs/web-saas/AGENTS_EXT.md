@@ -5,6 +5,17 @@
 
 ---
 
+## [EXT] Orchestrator — SaaS Large 기능 추가 분류 기준
+
+BASE 기준(`WORKFLOW.md §3`) 외에 다음도 **Large**로 분류한다:
+
+- DB 스키마 변경 (테이블 추가 / 컬럼 변경 / RLS 정책 변경)
+- API 라우트 신규 추가 또는 인증/소유권 로직 변경
+- 외부 API 연동 추가 (인증 제공자, 결제, 이메일 등)
+- 환경변수 신규 추가
+
+---
+
 ## [EXT] Implementer — SaaS 구현 순서
 
 SaaS 기능 구현 시 아래 순서를 따른다:
