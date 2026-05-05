@@ -17,10 +17,12 @@
 
 ## 세션 시작 체크리스트
 
-1. `CONSTITUTION.md` 읽기 — 불변 원칙 확인
-2. `docs/exec/NEXT_SESSION.md` 확인 — 이전 세션 핸드오프
-3. `PLANS.md` 현재 위치 확인
-4. `docs/exec/open-decisions.md` — 🔴 Blocker 항목 확인
+1. `CONSTITUTION.md` 확인 — 불변 원칙
+2. `WORKFLOW.md` 확인 — 사람-에이전트 운영 계약
+3. `docs/exec/NEXT_SESSION.md` 확인 — 이전 세션 핸드오프
+4. `PLANS.md` 현재 위치 확인
+5. `docs/exec/open-decisions.md` — 🔴 Blocker 항목 확인
+6. `.harness/manifest.yml` — 적용 팩 및 runtime 버전 확인
 
 ---
 
@@ -28,8 +30,8 @@
 
 | 명령어 | 용도 |
 |--------|------|
-| `/orchestrate "<작업>"` | 큰 기능 구현 (Implementer → Reviewer → Documenter) |
-| `/review` | 코드 검증만 수행 |
+| `/orchestrate "<작업>"` | 기능 구현 전체 흐름 (Implementer → Reviewer → Documenter) |
+| `/review` | 코드 검증만 단독 수행 |
 | `/sync-docs` | 세션 종료 전 문서 동기화 + 커밋 |
 | `/learn "<문제>"` | 교훈 승격 (LESSON_LIFECYCLE 5단계) |
 
@@ -47,7 +49,7 @@
 ## 문서 위계
 
 ```
-CONSTITUTION.md > CLAUDE.md > AGENTS.md > QUALITY_SCORE.md > ARCHITECTURE.md
+CONSTITUTION.md > WORKFLOW.md > CLAUDE.md > AGENTS.md > QUALITY_SCORE.md > ARCHITECTURE.md
 ```
 
 충돌 시 상위 문서 우선. 해결 안 되면 에스컬레이션 (`.claude/shared/ESCALATION_BLOCK.md`).

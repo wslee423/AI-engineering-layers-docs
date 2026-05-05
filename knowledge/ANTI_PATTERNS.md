@@ -1,7 +1,7 @@
 # ANTI_PATTERNS.md — 금지 패턴 모음
 
 > Core Layer 문서. **코드/구조 차원**의 반복 안티패턴.
-> 행동 차원 금지(무단 커밋, 스키마 변경 등)는 `AGENTS_PATTERN.md` 섹션 4.
+> 행동 차원 금지(무단 커밋, 스키마 변경 등)는 `core/AGENT_SCHEMA.md` 참조.
 > 실제 발생 사례는 `LESSONS_LEARNED.md`.
 
 ---

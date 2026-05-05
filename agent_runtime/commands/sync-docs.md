@@ -23,7 +23,7 @@ Main Session이 수행:
 2. 전달:
    - "Mode A — sync-docs" 명시
    - 최근 git diff 범위 (기본 `HEAD~1`)
-   - 프로젝트 문서 경로 (`docs/PLANS.md`, `docs/exec/*` 등)
+   - 프로젝트 문서 경로 (`PLANS.md`, `docs/exec/*` 등)
 3. documenter가 다음 수행:
    - PLANS.md / NEXT_SESSION.md / tech-debt / open-decisions 갱신
    - git commit

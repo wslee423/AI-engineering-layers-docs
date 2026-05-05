@@ -5,15 +5,15 @@
 
 ---
 
-## 왜 필요한가
+## 두 레포의 역할 구분
 
-에이전트는 세션마다 기억을 잃는다. 교훈도 마찬가지다.
+| 레포 | 역할 | 원칙 |
+|------|------|------|
+| **프로젝트 repo** | 실제 제품 개발. `project/.claude/`는 복사된 local runtime. | 원본 수정 금지. Backport Proposal까지만 생성. |
+| **ai_engineering_docs repo** | 하네스 원본. 여러 프로젝트의 교훈을 흡수해 개선. | 이 레포에서 직접 Claude Code를 열고 반영. |
 
-| 방식 | 결과 |
-|------|------|
-| 아무것도 안 함 | 같은 실수가 세션마다 반복 |
-| 프로젝트 문서에만 기록 | 다른 프로젝트는 여전히 모름 |
-| 이 루프 실행 | 검증된 교훈이 다음 프로젝트의 기본값이 됨 |
+**핵심 원칙:** 프로젝트 repo에서 `ai_engineering_docs`를 직접 수정하지 않는다.
+교훈은 `docs/exec/backports/BP-XXX.md`로 제안하고, `ai_engineering_docs` 레포에서 Owner가 직접 반영한다.
 
 ---
 
@@ -34,9 +34,74 @@
 
 ---
 
-## 실행 흐름
+## 전체 self-improving 흐름
 
-### 1. 세션 종료 시 (`/sync-docs`)
+### [프로젝트 repo에서]
+
+```
+1. project/.claude/ 수정 (local runtime 개선)
+        ↓
+2. 프로젝트에서 검증 (실제 기능 구현에 적용)
+        ↓
+3. docs/exec/lessons.md 에 교훈 기록 (L1)
+        ↓
+4. /sync-docs 실행 → /learn 후보 1~3개 제시
+        ↓
+5. Owner가 후보 중 하나 선택 → /learn "문제 설명" 실행
+        ↓
+6. Documenter Mode B: 레벨 판정 + 변경 계획 작성 + Owner 승인 대기
+        ↓
+7. Owner 승인 → Documenter가 변경 적용 + 커밋
+        ↓
+8. L4/L5인 경우 → docs/exec/backports/BP-XXX.md 자동 생성
+        ↓
+9. Owner에게 알림: "ai_engineering_docs 반영 검토 필요"
+```
+
+### [ai_engineering_docs repo에서]
+
+```
+10. ai_engineering_docs 레포에서 Claude Code 실행
+        ↓
+11. BP-XXX.md 내용 + 프로젝트 repo 맥락 확인
+        ↓
+12. 반영 위치 결정:
+    - agent_runtime/commands/ or agents/ → runtime 동작 개선
+    - templates/base/ → 다음 프로젝트 기본 문서 개선
+    - templates/packs/[pack]/ → 특정 타입 확장 개선
+    - core/ → 원칙/가이드 개선
+    - knowledge/ → 패턴/교훈 축적
+        ↓
+13. 해당 파일 수정
+        ↓
+14. VERSION.md 업데이트 (버전 정책 기준)
+        ↓
+15. CHANGELOG.md 업데이트 (backport(L<n>): <요약> from <프로젝트명>)
+        ↓
+16. 필요 시 UPGRADE_GUIDE.md 업데이트
+        ↓
+17. 커밋: backport(L<n>): <요약> from <프로젝트명>
+```
+
+### [다음 프로젝트]
+
+```
+18. 최신 agent_runtime/ → 새 프로젝트 .claude/로 복사
+        ↓
+19. 개선된 하네스로 시작 (이전 교훈이 기본값으로 내장)
+```
+
+### [기존 프로젝트]
+
+```
+자동 업그레이드 없음
+        ↓
+필요 시 UPGRADE_GUIDE.md 확인 → Owner가 수동 업그레이드 결정
+```
+
+---
+
+## 세션 종료 시 실행 흐름 (`/sync-docs`)
 
 ```
 [Documenter Mode A]
@@ -48,7 +113,9 @@ PLANS.md + NEXT_SESSION.md + tech-debt + open-decisions 갱신
 Owner가 후보 중 하나를 선택하면 → /learn 실행
 ```
 
-### 2. 교훈 승격 (`/learn "<문제>"`)
+---
+
+## 교훈 승격 흐름 (`/learn "<문제>"`)
 
 ```
 [Owner] /learn "Reviewer가 select('*')를 두 번째 잡았는데 Implementer가 또 씀"
@@ -65,37 +132,11 @@ Owner가 후보 중 하나를 선택하면 → /learn 실행
 L4 또는 L5인 경우 → docs/exec/backports/BP-XXX.md 자동 생성
 ```
 
-### 3. Backport (L4/L5만 해당)
-
-```
-docs/exec/backports/BP-XXX.md 생성됨
-  ↓
-Owner가 이 레포(ai_engineering_docs)에 수동 검토
-  ↓
-적용할 것: 해당 파일 직접 수정
-  (예: templates/packs/web-saas/QUALITY_EXT.md에 "select('*') 금지" 추가)
-  ↓
-커밋: backport(L<n>): <요약> from <프로젝트명>
-```
-
----
-
-## Owner의 역할
-
-| 단계 | Owner 행동 |
-|------|-----------|
-| `/learn` 후 계획 검토 | 승인 / 수정 요청 / 거부 |
-| L4/L5 BP-XXX.md 생성 후 | ai_engineering_docs에 반영 여부 별도 결정 |
-| 반영 시 | 해당 파일 직접 수정 + 커밋 |
-
-**L4/L5 변경은 ai_engineering_docs에 자동 반영되지 않는다.**
-Owner가 BP-XXX.md를 보고 직접 판단한다.
-
 ---
 
 ## Backport 파일 형식
 
-`docs/exec/backports/BP-XXX.md` (프로젝트 내 자동 생성):
+`docs/exec/backports/BP-XXX.md` (프로젝트에서 자동 생성 — proposal만):
 
 ```markdown
 # BP-001: [요약]
@@ -125,6 +166,19 @@ Owner가 BP-XXX.md를 보고 직접 판단한다.
 ```
 
 양식: `core/BACKPORT_PROPOSAL_TEMPLATE.md`
+
+---
+
+## Owner의 역할 요약
+
+| 단계 | Owner 행동 |
+|------|-----------|
+| `/learn` 후 계획 검토 | 승인 / 수정 요청 / 거부 |
+| L4/L5 BP-XXX.md 생성 후 | ai_engineering_docs에서 Claude Code 열고 반영 여부 결정 |
+| 반영 시 | ai_engineering_docs 레포에서 직접 수정 + 버전 업데이트 + 커밋 |
+
+**L4/L5 변경은 ai_engineering_docs에 자동 반영되지 않는다.**
+Owner가 BP-XXX.md를 보고 직접 ai_engineering_docs 레포에서 판단·적용한다.
 
 ---
 

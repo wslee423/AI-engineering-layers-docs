@@ -27,5 +27,5 @@
 - 스테이지 전용 자동 검증 루프가 별도 가치를 가짐
 
 분리 시 추가될 파일:
-- `.claude/agents/stage-builder.md`
+- `agent_runtime/agents/stage-builder.md`
 - 이 파일 내용 교체 (실제 slash command 정의로)

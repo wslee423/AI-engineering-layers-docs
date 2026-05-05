@@ -23,7 +23,7 @@
 정적 분석/테스트/규칙/구조/설정 중 하나에서 실패.
 처리: 자체 수정 시도 → 같은 오류 3회 실패 시 에스컬레이션.
 
-보고 형식은 `AGENTS_PATTERN.md` 섹션 4-2.
+보고 형식은 `agent_runtime/shared/ESCALATION_BLOCK.md` 참조.
 
 ---
 
@@ -54,13 +54,13 @@
 | 기능 루프 | 방향 결정 → 커밋 1 사이클 | WORKFLOW.md §4 |
 | 세션 루프 | 1회 Claude Code 세션 | WORKFLOW.md §2, §7 |
 | Phase 루프 | Phase 단위 큰 사이클 | WORKFLOW.md §8 |
-| 에스컬레이션 | 에이전트 → 사람 결정 요청 | WORKFLOW.md §6, ESCALATION_PROTOCOL.md |
+| 에스컬레이션 | 에이전트 → 사람 결정 요청 | WORKFLOW.md §6, `.claude/shared/ESCALATION_BLOCK.md` |
 
 ---
 
 ## 🤖 에이전트 역할
 
-현재 시스템의 4개 역할. 상세 구조는 `AGENTS_PATTERN.md` 참조.
+현재 시스템의 4개 역할. 상세 구조는 `core/AGENT_SCHEMA.md` 참조.
 
 | 역할 | 실행 주체 | 주요 책임 |
 |------|---------|---------|

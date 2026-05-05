@@ -1,17 +1,35 @@
 # .harness/manifest.yml — AI Harness 프로젝트 메타데이터
-# 이 파일은 harness 버전 추적과 팩 관리를 위해 사용된다.
+# 이 파일은 harness 버전 추적, 팩 관리, 업그레이드 충돌 추적을 위해 사용된다.
 
-harness_version: v0.1.0          # 이 프로젝트가 초기화된 harness 버전
-agent_runtime_version: v0.1.0    # 적용된 agent_runtime 버전 (.claude/ 기준)
+harness_repo: ai_engineering_docs         # 원본 harness 레포 이름
+harness_version: v0.1.0                   # 이 프로젝트가 초기화된 harness 버전
+base_template_version: v0.1.0             # 적용된 templates/base 버전
+agent_runtime_version: v0.1.0             # 적용된 agent_runtime 버전 (.claude/ 기준)
+created_date: YYYY-MM-DD                  # 프로젝트 초기화 날짜
 
-project_type: base               # base / web-saas / mobile-game / ai-agent / data-tool
+project_type: base                        # base | web-saas | mobile-game | ai-agent | data-tool
 
-applied_packs: []                # 적용된 팩 목록. 예: [web-saas, custom-auth]
+applied_packs: []
+# Pack 추가 시 아래 형식으로 기록:
 # applied_packs:
-#   - web-saas                   # 팩 적용 시 여기에 추가
-#   - mobile-game
+#   - name: web-saas
+#     applied_date: YYYY-MM-DD
+#     reason: 인증/RLS/API 보안 기준 필요
+#   - name: ai-agent-product
+#     applied_date: YYYY-MM-DD
+#     reason: LLM 응답 검증 + 토큰 비용 관리 필요
 
-runtime_customizations: []       # agent_runtime에서 변경한 파일 목록 (업그레이드 충돌 추적용)
+local_runtime_modified: false             # agent_runtime 복사 후 .claude/ 수정 여부
+runtime_customizations: []
+# Local runtime 수정 시 아래 형식으로 기록 (업그레이드 충돌 추적용):
 # runtime_customizations:
-#   - .claude/agents/implementer.md   # 변경 이유: 프로젝트 특화 제약 추가
-#   - .claude/commands/orchestrate.md
+#   - file: .claude/agents/implementer.md
+#     reason: 프로젝트 특화 제약 추가 (JWT 갱신 패턴)
+#     date: YYYY-MM-DD
+#   - file: .claude/commands/orchestrate.md
+#     reason: 스테이지 파이프라인 분기 추가
+
+backport_status: none
+# none | pending | applied
+# pending: docs/exec/backports/에 BP-XXX.md 생성됨, ai_engineering_docs 반영 대기 중
+# applied: ai_engineering_docs에 반영 완료

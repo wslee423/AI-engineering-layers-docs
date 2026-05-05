@@ -158,7 +158,7 @@ return <Content data={data} />
 - [ ] `CLAUDE.md`
 - [ ] `AGENTS.md`
 - [ ] `QUALITY_SCORE.md`
-- [ ] `docs/PLANS.md`
+- [ ] `PLANS.md`
 - [ ] `docs/exec/open-decisions.md`
 - [ ] `docs/exec/tech-debt.md`
 

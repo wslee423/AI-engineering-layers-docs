@@ -18,7 +18,7 @@
 
 ```
 - CONSTITUTION.md 확인
-- docs/PLANS.md에서 해당 기능 위치 확인
+- PLANS.md에서 해당 기능 위치 확인
 - docs/product-specs/[기능].md 분석
 - docs/exec/open-decisions.md에서 🔴 Blocker 없는지 확인
 ```
@@ -134,5 +134,5 @@ PREVIOUS_FAIL_REPORT: |
 - Documenter: 문서 동기화 + 커밋 완료
 - /learn 후보: [N개 제시됨 / 없음]
 
-다음 작업: docs/PLANS.md 확인
+다음 작업: PLANS.md 확인
 ```
