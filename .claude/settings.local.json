@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s \"https://api.github.com/repos/wslee423/AI-finance-management/git/trees/HEAD?recursive=1\")",
+      "Bash(python3 -c \"import json,sys; data=json.load\\(sys.stdin\\); [print\\(item['path']\\) for item in data.get\\('tree',[]\\)]\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git commit -m ' *)",
+      "Bash(git add *)",
+      "Bash(mkdir *)",
+      "Bash(git *)"
+    ]
+  }
+}
