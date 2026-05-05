@@ -5,6 +5,50 @@
 
 ---
 
+## Repo 단위 역할 구분
+
+AI Harness Engineering 시스템은 원본 하네스 repo와 실제 프로젝트 repo를 분리해서 운영한다.
+
+```
+D:/wlabs/
+├── ai_engineering_docs/              ← 원본 하네스 repo
+│   ├── core/                         ← 공통 원칙과 표준
+│   ├── templates/                    ← base 템플릿과 packs
+│   ├── agent_runtime/                ← upstream 실행 커널
+│   ├── knowledge/                    ← lessons, anti-patterns
+│   ├── README.md
+│   ├── QUICKSTART.md
+│   └── SELF_IMPROVING.md
+│
+├── ai-portfolio-service/             ← 실제 프로젝트 repo
+│   ├── .claude/                      ← agent_runtime 복사본, local runtime
+│   ├── .harness/manifest.yml         ← 적용된 하네스 버전과 Pack 기록
+│   ├── docs/exec/lessons.md          ← 프로젝트에서 발생한 교훈
+│   ├── docs/exec/backports/          ← Backport Proposal 저장 위치
+│   ├── CONSTITUTION.md
+│   ├── WORKFLOW.md
+│   ├── CLAUDE.md
+│   ├── AGENTS.md
+│   └── QUALITY_SCORE.md
+│
+└── mobile-game-project/              ← 다른 실제 프로젝트 repo
+    ├── .claude/
+    ├── .harness/manifest.yml
+    ├── docs/exec/lessons.md
+    └── docs/exec/backports/
+```
+
+**운영 원칙:**
+- `ai_engineering_docs/`는 원본 하네스가 개선되는 repo다.
+- 실제 프로젝트 repo는 실험, 검증, 적용의 장소다.
+- 프로젝트 repo의 `.claude/`는 `agent_runtime/`을 복사한 local runtime이다.
+- 프로젝트 repo에서 배운 개선사항은 바로 원본을 수정하지 않는다.
+- 프로젝트 repo에서는 `/learn`을 통해 Backport Proposal까지만 만든다.
+- 원본 반영은 `ai_engineering_docs/` repo에서 Claude Code를 열고 수행한다.
+- Owner 승인 전에는 `core/`, `templates/`, `agent_runtime/`, `knowledge/`를 직접 수정하지 않는다.
+
+---
+
 ## 두 레포의 역할 구분
 
 | 레포 | 역할 | 원칙 |
@@ -179,6 +223,55 @@ L4 또는 L5인 경우 → docs/exec/backports/BP-XXX.md 자동 생성
 
 **L4/L5 변경은 ai_engineering_docs에 자동 반영되지 않는다.**
 Owner가 BP-XXX.md를 보고 직접 ai_engineering_docs 레포에서 판단·적용한다.
+
+---
+
+## 원본 하네스 반영 프롬프트 예시
+
+프로젝트 repo에서 `/learn` 실행 후 Backport Proposal이 생성되면, 원본 반영은 `ai_engineering_docs/` repo에서 수행한다.
+
+Claude Code를 `ai_engineering_docs/` repo에서 열고 아래와 같이 요청한다.
+
+```
+D:/wlabs/ai_engineering_docs repo에서 작업해주세요.
+
+아래 프로젝트에서 생성된 Backport Proposal을 참고해서 원본 하네스에 반영해주세요.
+
+Source project:
+D:/wlabs/ai-portfolio-service
+
+Backport Proposal:
+D:/wlabs/ai-portfolio-service/docs/exec/backports/BP-2026-05-05-reviewer-auth-check.md
+
+작업 원칙:
+1. 프로젝트 repo는 수정하지 말고 ai_engineering_docs repo만 수정하세요.
+2. Backport Proposal의 문제, local change, validation evidence를 먼저 검토하세요.
+3. 반영 위치를 아래 중에서 판단하세요.
+   - 모든 프로젝트 공통 원칙이면 core/
+   - 기본 프로젝트 문서 구조 개선이면 templates/base/
+   - 특정 유형 프로젝트 기준이면 templates/packs/[pack]/
+   - 에이전트 실행 방식 개선이면 agent_runtime/
+   - 사례 또는 안티패턴 축적이면 knowledge/
+4. agent_runtime/이 변경되면 반드시 agent_runtime/VERSION.md와 CHANGELOG.md를 업데이트하세요.
+5. 호환성 영향이 있거나 기존 프로젝트 업그레이드 주의사항이 있으면 UPGRADE_GUIDE.md도 업데이트하세요.
+6. Pack 기준이 변경되면 해당 Pack의 QUALITY_EXT.md, ARCHITECTURE_EXT.md, AGENTS_EXT.md, CHECKLIST_EXT.md 중 필요한 파일만 수정하세요.
+7. 변경 후 아래 형식으로 보고하세요.
+
+보고 형식:
+- 반영 여부:
+- 반영 위치:
+- 변경 파일:
+- version impact: patch / minor / major / none
+- 기존 프로젝트 영향:
+- 추가 검토 필요사항:
+```
+
+**추가 원칙:**
+- Backport Proposal은 원본 수정 요청서이지 자동 반영 명령이 아니다.
+- Owner 승인 전에는 원본 하네스를 수정하지 않는다.
+- 원본 반영은 항상 `ai_engineering_docs/` repo에서 수행한다.
+- 반영 후 다음 프로젝트는 최신 `agent_runtime/`을 복사받아 개선된 하네스로 시작한다.
+- 기존 프로젝트는 자동 업그레이드하지 않고 `UPGRADE_GUIDE.md`를 참고해 수동 업그레이드한다.
 
 ---
 

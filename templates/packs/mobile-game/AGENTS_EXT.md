@@ -66,4 +66,6 @@ BASE 검증 외 추가 체크:
 | 저장 실패 시 복구 동작 | 엣지 케이스 수동 확인 |
 
 > Stage Builder 역할은 현재 Implementer가 흡수.
-> 스테이지 작업 규모가 전체의 30% 이상이 되면 별도 분리 검토 (`commands/build-stage.md` 참조).
+> 기본 게임 기능 구현은 `agent_runtime/commands/orchestrate.md` 흐름을 따른다.
+> 스테이지 작업 규모가 전체의 30% 이상이 되면 `agent_runtime/commands/build-stage.md`를 참조하거나 고도화한다.
+> Pack은 command를 직접 보유하지 않으며, 실행 command의 원본은 항상 `agent_runtime/`에 둔다.
