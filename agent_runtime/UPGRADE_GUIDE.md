@@ -21,14 +21,17 @@
 
 신규 프로젝트: `agent_runtime/`을 그대로 `.claude/`로 복사.
 
-기존 프로젝트 (claude_code 기반):
+기존 프로젝트 (`claude_code/` 기반 — V3 이전 구조):
+
+> 아래 경로는 V3 이전 legacy 경로입니다. 현재 기준 경로는 `core/`, `agent_runtime/`, `docs/exec/`입니다.
+
 ```
 변경 사항:
 1. .claude/hooks/validate-reviewer-call.js 경로 참조 — 변경 없음
 2. .claude/commands/ 내 경로 참조 갱신 필요:
-   - core_docs/ → core/
-   - docs/exec-plans/ → docs/exec/
-   - BACKPORT_PROPOSAL.md → docs/exec/backports/BP-XXX.md
+   - (legacy) core_docs/  →  (현재) core/
+   - (legacy) docs/exec-plans/  →  (현재) docs/exec/
+   - (legacy) BACKPORT_PROPOSAL.md  →  (현재) docs/exec/backports/BP-XXX.md
 3. .claude/shared/ 디렉토리 생성
 4. ESCALATION_BLOCK.md를 .claude/shared/에 복사
 5. VERSION.md, CHANGELOG.md, UPGRADE_GUIDE.md를 .claude/에 복사

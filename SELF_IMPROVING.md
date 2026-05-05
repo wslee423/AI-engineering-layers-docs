@@ -68,11 +68,17 @@ D:/wlabs/
 | **L1** | 프로젝트 `docs/exec/lessons.md` | 사례 기록 — 사람이 회고하면 나옴 |
 | **L2** | `knowledge/ANTI_PATTERNS.md` | "X 하지 말고 Y 해라" 패턴으로 명문화 |
 | **L3** | 프로젝트 `QUALITY_SCORE.md` | Reviewer가 매번 기계적으로 체크 |
-| **L4** | `.claude/agents/*.md` 또는 `.claude/commands/*.md` | Implementer가 애초에 안 하게 됨 |
+| **L4** | 프로젝트: `.claude/agents/*.md` 또는 `.claude/commands/*.md`<br>원본 backport: `agent_runtime/agents/` 또는 `agent_runtime/commands/` | Implementer가 애초에 안 하게 됨 |
 | **L5** | `templates/base/*` 또는 `templates/packs/*` | 다음 프로젝트는 처음부터 적용 |
 
 레벨이 높아질수록 변경 비용은 크지만 행동 변경 효과도 강해진다.
 **대부분의 교훈은 L2~L3에서 멈추는 것이 정상.** L4~L5는 정말 핵심 원칙만.
+
+> **L4 runtime 구분:**
+> - 프로젝트 내부에서는 `.claude/agents/` 또는 `.claude/commands/`를 수정한다 (local runtime).
+> - 원본 하네스로 backport할 때는 `agent_runtime/agents/` 또는 `agent_runtime/commands/`에 반영한다 (upstream runtime).
+> - `project/.claude/` = local runtime (실험·수정 허용)
+> - `ai_engineering_docs/agent_runtime/` = upstream runtime (검증된 개선사항만 반영)
 
 승격 상세 기준: `core/LESSON_LIFECYCLE.md`
 
