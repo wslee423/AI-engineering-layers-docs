@@ -42,6 +42,6 @@ reviewer는 의도와 무관하게 QUALITY_SCORE.md 기준만 본다.
 
 ## 출력
 
-reviewer subagent의 PASS/FAIL 보고 (`claude_code/agents/reviewer.md` 참조).
+reviewer subagent의 PASS/FAIL 보고 (`.claude/agents/reviewer.md` 참조).
 
 FAIL인 경우 "권장 수정" 항목을 확인 후 직접 수정 또는 `/orchestrate` 재실행.

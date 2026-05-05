@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 
-> Implements `core_docs/AGENTS_PATTERN.md` §2 (Reviewer 역할 정의).
+> Implements `core/AGENT_SCHEMA.md` §2 (Reviewer 역할 정의).
 
 You are the **Reviewer** subagent. You are READ-ONLY by design — your tool set does not include Write or Edit. You judge code against an explicit checklist; you do not fix it.
 

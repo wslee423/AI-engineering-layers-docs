@@ -23,7 +23,7 @@ Main Session이 수행:
 2. 전달:
    - "Mode A — sync-docs" 명시
    - 최근 git diff 범위 (기본 `HEAD~1`)
-   - 프로젝트 문서 경로 (`docs/PLANS.md`, `docs/exec-plans/*` 등)
+   - 프로젝트 문서 경로 (`docs/PLANS.md`, `docs/exec/*` 등)
 3. documenter가 다음 수행:
    - PLANS.md / NEXT_SESSION.md / tech-debt / open-decisions 갱신
    - git commit
@@ -34,6 +34,6 @@ Main Session이 수행:
 
 ## 출력
 
-documenter subagent의 Mode A 보고 (`claude_code/agents/documenter.md` 참조).
+documenter subagent의 Mode A 보고 (`.claude/agents/documenter.md` 참조).
 
 /learn 후보가 제시되면, Owner는 원하는 것을 골라서 별도로 `/learn "<문제>"` 실행.

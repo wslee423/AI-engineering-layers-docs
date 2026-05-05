@@ -20,14 +20,14 @@
 - CONSTITUTION.md 확인
 - docs/PLANS.md에서 해당 기능 위치 확인
 - docs/product-specs/[기능].md 분석
-- docs/exec-plans/open-decisions.md에서 🔴 Blocker 없는지 확인
+- docs/exec/open-decisions.md에서 🔴 Blocker 없는지 확인
 ```
 
 ---
 
 ## 2. 기능 크기 판단
 
-`core_docs/WORKFLOW.md` §3 기준 적용.
+`WORKFLOW.md` §3 기준 적용.
 
 **Small** — 아래 3가지 모두 해당:
 - 데이터 스키마 변경 없음
@@ -40,7 +40,7 @@
 - AI 프롬프트 핵심 변경
 - 4개 이상 파일 수정 예상
 
-> 프로젝트 타입별 추가 기준은 `templates_docs/<type>/claude_code/commands/orchestrate.md` 참조.
+> 프로젝트 타입별 추가 기준은 `AGENTS.md` §Pack Extensions 참조 (Pack 적용 시 해당 섹션에 누적됨).
 
 ---
 
@@ -119,7 +119,7 @@ PREVIOUS_FAIL_REPORT: |
 |----------|------|
 | Implementer 1~2회 실패 | 실패 내용 전달 후 재호출 |
 | Reviewer FAIL 1~2회 | 권장 수정을 implementer에게 전달 후 재호출 |
-| 3회 연속 실패 | 에스컬레이션 (`core_docs/ESCALATION_PROTOCOL.md`) |
+| 3회 연속 실패 | 에스컬레이션 (`.claude/shared/ESCALATION_BLOCK.md` 형식 사용) |
 
 ---
 
