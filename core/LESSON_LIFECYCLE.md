@@ -20,11 +20,11 @@
 
 | 레벨 | 위치 | 효과 |
 |------|------|------|
-| **L1** | `LESSONS_LEARNED.md` | 사례 기록 — 사람이 회고하면 나옴 |
-| **L2** | `ANTI_PATTERNS.md` | 패턴화 — "X 하지 말고 Y 해라" 규칙으로 명문화 |
+| **L1** | `docs/exec/lessons.md` (프로젝트) | 사례 기록 — 사람이 회고하면 나옴 |
+| **L2** | `knowledge/ANTI_PATTERNS.md` | 패턴화 — "X 하지 말고 Y 해라" 규칙으로 명문화 |
 | **L3** | `QUALITY_SCORE.md` | 기계적 검증 — Reviewer가 매번 체크 |
 | **L4** | `.claude/agents/*.md` 또는 `.claude/commands/*.md` | 에이전트 행동 변경 — Implementer가 애초에 안 함 |
-| **L5** | `templates/<type>/*` | 템플릿 기본값 — 다음 프로젝트는 처음부터 적용 |
+| **L5** | `templates/base/*` 또는 `templates/packs/*` | 템플릿 기본값 — 다음 프로젝트는 처음부터 적용 |
 
 레벨이 높아질수록 **변경 비용은 커지지만, 행동 변경 효과도 강해진다.**
 
@@ -78,7 +78,7 @@
 2. Documenter subagent가 위 승격 기준에 따라 레벨 판정 + 변경 계획 작성
 3. Owner 승인
 4. Documenter가 변경 적용 + 단일 커밋 (`learn(L<n>): <요약>`)
-5. L4 또는 L5인 경우 → `BACKPORT_PROPOSAL.md` 생성 (ai_engineering_docs로의 역방향 제안)
+5. L4 또는 L5인 경우 → `docs/exec/backports/BP-XXX.md` 생성 (ai_engineering_docs로의 역방향 제안)
 
 ---
 
@@ -86,7 +86,7 @@
 
 ### 예시 1 — `select('*')` 남용
 
-- L1: 한 번 발견 → LESSONS_LEARNED.md 기록
+- L1: 한 번 발견 → `docs/exec/lessons.md` 기록
 - L2: 두 번째 발견 → ANTI_PATTERNS.md "select('*') 금지, 명시 컬럼만"
 - L3: grep 가능 → QUALITY_SCORE.md "select('*') 사용 0건 확인"
 - L4: 굳이 갈 필요 없음 (Reviewer가 잡으면 충분)
@@ -95,10 +95,10 @@
 
 ### 예시 2 — Soft delete 누락
 
-- L1: 발견 → LESSONS_LEARNED.md
+- L1: 발견 → `docs/exec/lessons.md`
 - L2: ANTI_PATTERNS.md "Hard delete 금지"
 - L3: QUALITY_SCORE.md "`.delete()` 사용 0건 확인"
 - L4: Implementer 시스템 프롬프트에 "재무 데이터 hard delete 금지" 추가
-- L5: templates/saas/QUALITY_SCORE.md 기본값에 포함
+- L5: `templates/packs/web-saas/QUALITY_EXT.md` 기본값에 포함
 
 → **L5까지 승격** (모든 saas 프로젝트에 적용 가능한 핵심 규칙)

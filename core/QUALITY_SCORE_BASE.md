@@ -13,7 +13,7 @@
 
 ## 2. 코드 품질
 
-### 2-1. 정적 분석 (경고 0건)
+### 2-1. 정적 분석 (경고 0건) `[자동검증 가능]`
 | 항목 | 기준 |
 |------|------|
 | 컴파일/타입 오류 | 0건 |
@@ -35,7 +35,7 @@
 | 상수 | UPPER_SNAKE_CASE | `MAX_RETRY_COUNT` |
 | 파일명 | 언어 관례 따름 | 프로젝트에서 한 번 정하고 일관성 유지 |
 
-### 2-3. 파일/함수 크기
+### 2-3. 파일/함수 크기 `[자동검증 가능]`
 | 항목 | 기준 | 초과 시 |
 |------|------|--------|
 | 단일 파일 | 300줄 이하 | 파일 분리 |
@@ -68,9 +68,9 @@ UI 상태를 다루는 모든 기능에 아래 3가지 테스트가 모두 존�
 
 > ⚠️ **상태 반응성 테스트 누락은 버그를 은닉한다.**
 > 로직 테스트만으로는 "값은 바뀌었는데 UI가 안 바뀌는" 버그를 못 잡는다.
-> (LESSONS_LEARNED.md: HudOverlay StatelessWidget 사례)
+> (knowledge/LESSONS_LEARNED.md: HudOverlay StatelessWidget 사례)
 
-### 3-2. 테스트 커버리지
+### 3-2. 테스트 커버리지 `[자동검증 가능]`
 | 대상 | 기준 |
 |------|------|
 | 핵심 비즈니스 로직 | 70% 이상 |
@@ -146,7 +146,7 @@ if (!data) return <Skeleton />
 return <Content data={data} />
 ```
 
-> (LESSONS_LEARNED.md: Fire-and-forget + UI 상태 머신 사례)
+> (knowledge/LESSONS_LEARNED.md: Fire-and-forget + UI 상태 머신 사례)
 
 ---
 
@@ -159,8 +159,8 @@ return <Content data={data} />
 - [ ] `AGENTS.md`
 - [ ] `QUALITY_SCORE.md`
 - [ ] `docs/PLANS.md`
-- [ ] `docs/exec-plans/open-decisions.md`
-- [ ] `docs/exec-plans/tech-debt-tracker.md`
+- [ ] `docs/exec/open-decisions.md`
+- [ ] `docs/exec/tech-debt.md`
 
 ### 6-2. 문서 작성 규칙
 - 한국어 우선, 기술 용어는 영문 허용

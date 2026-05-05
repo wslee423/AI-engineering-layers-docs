@@ -36,8 +36,8 @@
 
 | 파일 | 변경 내용 |
 |------|----------|
-| [예: core_docs/QUALITY_SCORE_BASE.md] | [예: §3에 "select('*') 금지" 추가] |
-| [예: claude_code/agents/reviewer.md] | [예: 체크리스트에 grep 명령 추가] |
+| [예: core/QUALITY_SCORE_BASE.md] | [예: §3에 "select('*') 금지" 추가] |
+| [예: .claude/agents/reviewer.md] | [예: 체크리스트에 grep 명령 추가] |
 
 ### 영향 분석
 
@@ -55,4 +55,4 @@
 승인 시 적용 절차:
 1. `ai_engineering_docs` 레포에서 위 변경 직접 적용
 2. 커밋 메시지: `backport(L<n>): <요약> from <프로젝트명>`
-3. 이 BACKPORT_PROPOSAL.md를 프로젝트의 `docs/exec-plans/archive/`로 이동
+3. 이 BP-XXX.md를 프로젝트의 `docs/exec/archive/`로 이동
